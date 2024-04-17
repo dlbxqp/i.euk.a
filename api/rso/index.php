@@ -2,11 +2,11 @@
 require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');
 
 
-//die( json_encode(['houseId' => $_POST['houseId']], JSON_UNESCAPED_UNICODE) );
+//die( json_encode(['houseId' => $_GET['houseId']], JSON_UNESCAPED_UNICODE) );
 
 
-(isset($_POST['fields']) and is_array($_POST['fields'])) && ($GLOBALS['fields'] = (array)$_POST['fields']);
-$GLOBALS['arrFilter'] = isset($_POST['houseId']) ? ['PROPERTY_rso__houses' => [ (int)$_POST['houseId'] ] ] : [];
+(isset($_GET['fields']) and is_array($_GET['fields'])) && ($GLOBALS['fields'] = (array)$_GET['fields']);
+$GLOBALS['arrFilter'] = isset($_GET['houseId']) ? ['PROPERTY_rso__houses' => [ (int)$_GET['houseId'] ] ] : [];
 $APPLICATION->IncludeComponent(
  'bitrix:news.list',
  'rso',
@@ -30,9 +30,7 @@ $APPLICATION->IncludeComponent(
   'DISPLAY_PICTURE' => 'Y',
   'DISPLAY_PREVIEW_TEXT' => 'Y',
   'DISPLAY_TOP_PAGER' => 'N',
-  'FIELD_CODE' => [
-   0 => ''
-  ],
+  'FIELD_CODE' => [],
   'FILTER_NAME' => 'arrFilter',
   'HIDE_LINK_WHEN_NO_DETAIL' => 'N',
   'IBLOCK_ID' => 11,
@@ -40,7 +38,7 @@ $APPLICATION->IncludeComponent(
   'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',
   'INCLUDE_SUBSECTIONS' => 'N',
   'MESSAGE_404' => '',
-  'NEWS_COUNT' => ((int)$_POST['count'] > 0) ? $_POST['count'] : 999,
+  'NEWS_COUNT' => ((int)$_GET['count'] > 0) ? $_GET['count'] : 999999,
   'PAGER_BASE_LINK_ENABLE' => 'N',
   'PAGER_DESC_NUMBERING' => 'N',
   'PAGER_DESC_NUMBERING_CACHE_TIME' => 36000,
@@ -52,8 +50,7 @@ $APPLICATION->IncludeComponent(
   'PARENT_SECTION_CODE' => '',
   'PREVIEW_TRUNCATE_LEN' => '',
   'PROPERTY_CODE' => [
-   0 => '',
-   1 => 'rso__houses'
+   'rso__houses'
   ],
   'SET_BROWSER_TITLE' => 'N',
   'SET_LAST_MODIFIED' => 'N',

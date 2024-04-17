@@ -1,9 +1,9 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');
 
-//die( json_encode(['operatingCompanyId' => $_POST['operatingCompanyId']], JSON_UNESCAPED_UNICODE) );
+//die( json_encode(['operatingCompanyId' => $_GET['operatingCompanyId']], JSON_UNESCAPED_UNICODE) );
 
-$GLOBALS['arrFilter'] = isset($_POST['operatingCompanyId']) ? ['PROPERTY_important_to_know__operating_company' => $_POST['operatingCompanyId']] : [];
+$GLOBALS['arrFilter'] = isset($_GET['operatingCompanyId']) ? ['PROPERTY_important_to_know__operating_company' => $_GET['operatingCompanyId']] : [];
 $APPLICATION->IncludeComponent(
  'bitrix:news.list',
  'important_to_know',
@@ -27,10 +27,7 @@ $APPLICATION->IncludeComponent(
   'DISPLAY_PICTURE' => 'Y',
   'DISPLAY_PREVIEW_TEXT' => 'Y',
   'DISPLAY_TOP_PAGER' => 'N',
-  'FIELD_CODE' => [
-   0 => '',
-   1 => '',
-  ],
+  'FIELD_CODE' => [],
   'FILTER_NAME' => 'arrFilter',
   'HIDE_LINK_WHEN_NO_DETAIL' => 'N',
   'IBLOCK_ID' => 6,
@@ -38,7 +35,7 @@ $APPLICATION->IncludeComponent(
   'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',
   'INCLUDE_SUBSECTIONS' => 'N',
   'MESSAGE_404' => '',
-  'NEWS_COUNT' => ((int)$_POST['count'] > 0) ? $_POST['count'] : 999,
+  'NEWS_COUNT' => ((int)$_GET['count'] > 0) ? $_GET['count'] : 999999,
   'PAGER_BASE_LINK_ENABLE' => 'N',
   'PAGER_DESC_NUMBERING' => 'N',
   'PAGER_DESC_NUMBERING_CACHE_TIME' => 36000,
@@ -50,8 +47,8 @@ $APPLICATION->IncludeComponent(
   'PARENT_SECTION_CODE' => '',
   'PREVIEW_TRUNCATE_LEN' => '',
   'PROPERTY_CODE' => [
-   0 => 'important_to_know__operating_company',
-   1 => 'important_to_know__documents'
+   'important_to_know__operating_company',
+   'important_to_know__documents'
   ],
   'SET_BROWSER_TITLE' => 'N',
   'SET_LAST_MODIFIED' => 'N',

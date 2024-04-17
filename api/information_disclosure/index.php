@@ -1,19 +1,19 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');
 
-//die( json_encode(['POST' => $_POST], JSON_UNESCAPED_UNICODE) );
+//die( json_encode(['POST' => $_GET], JSON_UNESCAPED_UNICODE) );
 
-if( isset($_POST['operatingCompanyId']) ){
+if( isset($_GET['operatingCompanyId']) ){
  $GLOBALS['arrFilter'] = [
-  'PROPERTY_information_disclosure__operating_company' => $_POST['operatingCompanyId'],
+  'PROPERTY_information_disclosure__operating_company' => $_GET['operatingCompanyId'],
   # https://buldenkov.ru/blog/articles/bitrix/184-bitriks-filtratsiya-po-date не работает:
-  //'>=DATE_ACTIVE_FROM' => "{$_POST['year']}-01-01 00:00:00",
-  //'<=DATE_ACTIVE_FROM' => "{$_POST['year']}-12-31 23:59:59"
+  //'>=DATE_ACTIVE_FROM' => "{$_GET['year']}-01-01 00:00:00",
+  //'<=DATE_ACTIVE_FROM' => "{$_GET['year']}-12-31 23:59:59"
  ];
 } else{
  $GLOBALS['arrFilter'] = [];
 }
-#Есть ещё фильтр с $_POST['year'] в компоненте
+#Есть ещё фильтр с $_GET['year'] в компоненте
 $APPLICATION->IncludeComponent(
  'bitrix:news.list',
  'information_disclosure',
@@ -67,10 +67,10 @@ $APPLICATION->IncludeComponent(
   'SET_STATUS_404' => 'N',
   'SET_TITLE' => 'N',
   'SHOW_404' => 'N',
-  'SORT_BY1' => 'NAME',
-  'SORT_BY2' => 'ACTIVE_FROM',
+  'SORT_BY1' => 'ACTIVE_FROM',
+  'SORT_BY2' => 'ORDER',
   'SORT_ORDER1' => 'ASC',
-  'SORT_ORDER2' => 'DESC',
+  'SORT_ORDER2' => 'ASC',
   'STRICT_SECTION_CHECK' => 'N',
   'COMPONENT_TEMPLATE' => '.default'
 	],

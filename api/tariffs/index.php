@@ -1,19 +1,19 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');
 
-//die( json_encode(['houseId' => $_POST['houseId']], JSON_UNESCAPED_UNICODE) );
+//die( json_encode(['houseId' => $_GET['houseId']], JSON_UNESCAPED_UNICODE) );
 
 $GLOBALS['arrFilter'] = [];
-if( isset($_POST['houseId']) ){
+if( isset($_GET['houseId']) ){
  $GLOBALS['arrFilter'] = [
-  'PROPERTY_tariffs__houses' => [ (int)$_POST['houseId'] ]
+  'PROPERTY_tariffs__houses' => [ (int)$_GET['houseId'] ]
  ];
- if( isset($_POST['semester']) ){
-  $GLOBALS['arrFilter']['PROPERTY_tariffs__halfyear'] = mb_strtolower($_POST['semester']);
+ if( isset($_GET['semester']) ){
+  $GLOBALS['arrFilter']['PROPERTY_tariffs__halfyear'] = mb_strtolower($_GET['semester']);
  }
 }
 
-(isset($_POST['fields']) and is_array($_POST['fields'])) && ($GLOBALS['fields'] = (array)$_POST['fields']);
+(isset($_GET['fields']) and is_array($_GET['fields'])) && ($GLOBALS['fields'] = (array)$_GET['fields']);
 $APPLICATION->IncludeComponent(
  'bitrix:news.list',
  'tariffs',
@@ -48,7 +48,7 @@ $APPLICATION->IncludeComponent(
   'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',
   'INCLUDE_SUBSECTIONS' => 'N',
   'MESSAGE_404' => '',
-  'NEWS_COUNT' => (isset($_POST['count']) && (int)$_POST['count'] > 0) ? $_POST['count'] : 999999,
+  'NEWS_COUNT' => (isset($_GET['count']) && (int)$_GET['count'] > 0) ? $_GET['count'] : 999999,
   'PAGER_BASE_LINK_ENABLE' => 'N',
   'PAGER_DESC_NUMBERING' => 'N',
   'PAGER_DESC_NUMBERING_CACHE_TIME' => 36000,

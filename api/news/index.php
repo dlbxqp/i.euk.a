@@ -27,10 +27,7 @@ $APPLICATION->IncludeComponent(
   'DISPLAY_PICTURE' => 'Y',
   'DISPLAY_PREVIEW_TEXT' => 'Y',
   'DISPLAY_TOP_PAGER' => 'N',
-  'FIELD_CODE' => [
-   0 => '',
-   1 => '',
-  ],
+  'FIELD_CODE' => [],
   'FILTER_NAME' => 'arrFilter',
   'HIDE_LINK_WHEN_NO_DETAIL' => 'N',
   'IBLOCK_ID' => 8,

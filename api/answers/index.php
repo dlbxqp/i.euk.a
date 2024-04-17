@@ -1,9 +1,9 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');
 
-//die( json_encode(['operatingCompanyId' => $_POST['operatingCompanyId']], JSON_UNESCAPED_UNICODE) );
+//die( json_encode(['operatingCompanyId' => $_GET['operatingCompanyId']], JSON_UNESCAPED_UNICODE) );
 
-$GLOBALS['arrFilter'] = isset($_POST['operatingCompanyId']) ? ['PROPERTY_answers__operating_company' => $_POST['operatingCompanyId']] : [];
+$GLOBALS['arrFilter'] = isset($_GET['operatingCompanyId']) ? ['PROPERTY_answers__operating_company' => $_GET['operatingCompanyId']] : [];
 $APPLICATION->IncludeComponent(
  'bitrix:news.list',
  'answers',
@@ -38,7 +38,7 @@ $APPLICATION->IncludeComponent(
   'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',
   'INCLUDE_SUBSECTIONS' => 'N',
   'MESSAGE_404' => '',
-  'NEWS_COUNT' => 99,
+  'NEWS_COUNT' => 999999,
   'PAGER_BASE_LINK_ENABLE' => 'N',
   'PAGER_DESC_NUMBERING' => 'N',
   'PAGER_DESC_NUMBERING_CACHE_TIME' => 36000,

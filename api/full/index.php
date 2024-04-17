@@ -2,11 +2,18 @@
 require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');
 
 
+if(!isset($_GET['code'])){
+ $a_url = parse_url( $_SERVER['HTTP_REFERER'] );
+ $_GET['code'] = $a_url['host']; //die( json_encode( $a_url ) );
+ //$URLPath = $a_url['path'];
+ //$URLQuery = $a_url['query'];
+}
+
+
 $GLOBALS['currentOperatingCompanyId'] = NULL;
 $GLOBALS['aCurrentHousingComplexes'] = [];
 $GLOBALS['aCurrentHouses'] = [];
 $GLOBALS['aResult'] = [];
-
 
 #< operating company
 $APPLICATION->IncludeComponent(
@@ -145,7 +152,9 @@ $APPLICATION->IncludeComponent(
 #> housing complexes
 
 #< houses (нужно для данных из transfer)
-$GLOBALS['arrFilter'] = ['PROPERTY_houses__housing_complex' => ((count($GLOBALS['aCurrentHousingComplexes']) > 0) ? $GLOBALS['aCurrentHousingComplexes'] : [0]) ];
+$GLOBALS['arrFilter'] = [
+ 'PROPERTY_houses__housing_complex' => ((count($GLOBALS['aCurrentHousingComplexes']) > 0) ? $GLOBALS['aCurrentHousingComplexes'] : [0])
+];
 $APPLICATION->IncludeComponent(
  'bitrix:news.list',
  'hat__houses',
@@ -504,6 +513,5 @@ if( $_GET['section'] == 'information_disclosure' ){
 
 }
 #> submenu
-
 
 exit( json_encode($GLOBALS['aResult'], JSON_UNESCAPED_UNICODE) );

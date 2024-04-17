@@ -29,11 +29,11 @@ foreach($arResult['ITEMS'] as $arItem){
 // > new */
 
 //* < old
-if(isset($_POST['houseId'])){
- $aTransfer = json_decode(file_get_contents("../../transfer/tariffs/data/{$_POST['houseId']}/data.json"), true);
+if(isset($_GET['houseId'])){
+ $aTransfer = json_decode(file_get_contents("../../transfer/tariffs/data/{$_GET['houseId']}/data.json"), true);
  //die('> ' . json_encode( $aTransfer) );
  foreach($aTransfer as $v){
-  if($v['halfyear'] != mb_strtolower($_POST['semester'])) continue;
+  if($v['halfyear'] != mb_strtolower($_GET['semester'])) continue;
 
   $aa = [];
   in_array('id', (array)$GLOBALS['fields']) && ($aa['id'] = $v['id']);

@@ -4,7 +4,7 @@ $this->setFrameMode(true);
 
 //die('<pre>' . print_r($arResult['ITEMS'], true) . '</pre>');
 
-isset($_POST['operatingCompanyId']) && ($operatingCompanyId = $_POST['operatingCompanyId']);
+isset($_GET['operatingCompanyId']) && ($operatingCompanyId = $_GET['operatingCompanyId']);
 $a = ['counts' => [], 'items' => []];
 foreach($arResult['ITEMS'] as $arItem){
  $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem['IBLOCK_ID'], 'ELEMENT_EDIT'));
@@ -18,7 +18,7 @@ foreach($arResult['ITEMS'] as $arItem){
   $a['counts'][$year] = 1;
  }
  #
- if( (int)$year == (int)$_POST['year'] ){
+ if( (int)$year == (int)$_GET['year'] ){
   $anDocuments = [];
   $aA = $arItem['DISPLAY_PROPERTIES']['information_disclosure__documents']['FILE_VALUE'];
   $aDocuments = isset($aA['ID']) ? [0 => $aA] : $aA;
@@ -50,13 +50,13 @@ foreach($arResult['ITEMS'] as $arItem){
 //die('> <pre>' . print_r($a) . '</pre>');
 
 $i = 999;
-if( isset($_POST['count']) ){
+if( isset($_GET['count']) ){
  $count = count($a['items']);
- $i = ($count < (int)$_POST['count']) ? ((int)$_POST['count'] - $count) : 0;
+ $i = ($count < (int)$_GET['count']) ? ((int)$_GET['count'] - $count) : 0;
 } //die(count($a['items']) . ' > ' . $count . ' > ' . $i);
 $aTransfer = json_decode( file_get_contents("../../transfer/information_disclosure/{$operatingCompanyId}/data.json"), true);
 //die('<pre>' . $operatingCompanyId . print_r($aTransfer, true) .  '</pre>');
-foreach($aTransfer as $v){ //die('> ' . (int)$_POST['year'] . print_r($v));
+foreach($aTransfer as $v){ //die('> ' . (int)$_GET['year'] . print_r($v));
  if( isset($a['counts'][ $v['year'] ]) ){
   $a['counts'][ $v['year'] ]++;
  } else {
@@ -64,7 +64,7 @@ foreach($aTransfer as $v){ //die('> ' . (int)$_POST['year'] . print_r($v));
  }
 
  if($i > 0){
-  if(isset($_POST['year']) and (int)$v['year'] !== (int)$_POST['year']) continue;
+  if(isset($_GET['year']) and (int)$v['year'] !== (int)$_GET['year']) continue;
 
   $i--;
 

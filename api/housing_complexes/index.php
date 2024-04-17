@@ -1,15 +1,15 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');
 
-//die( json_encode(['PROPERTY_housing_complexes__operating_company' => $_POST['id']], JSON_UNESCAPED_UNICODE) );
+//die( json_encode(['PROPERTY_housing_complexes__operating_company' => $_GET['id']], JSON_UNESCAPED_UNICODE) );
 
-if( isset($_POST['id']) ){
- $GLOBALS['arrFilter'] = [ 'PROPERTY_housing_complexes__operating_company' => $_POST['id'] ];
-} elseif( isset($_POST['code']) ){
- $GLOBALS['arrFilter'] = [ 'CODE' => $_POST['code'] ];
+if( isset($_GET['id']) ){
+ $GLOBALS['arrFilter'] = [ 'PROPERTY_housing_complexes__operating_company' => $_GET['id'] ];
+} elseif( isset($_GET['code']) ){
+ $GLOBALS['arrFilter'] = [ 'CODE' => $_GET['code'] ];
 }
 
-(isset($_POST['fields']) and is_array($_POST['fields'])) && ($GLOBALS['fields'] = (array)$_POST['fields']);
+(isset($_GET['fields']) and is_array($_GET['fields'])) && ($GLOBALS['fields'] = (array)$_GET['fields']);
 
 $APPLICATION->IncludeComponent(
  'bitrix:news.list',
@@ -34,9 +34,7 @@ $APPLICATION->IncludeComponent(
   'DISPLAY_PICTURE' => 'Y',
   'DISPLAY_PREVIEW_TEXT' => 'Y',
   'DISPLAY_TOP_PAGER' => 'N',
-  'FIELD_CODE' => [
-   0 => ''
-  ],
+  'FIELD_CODE' => [],
   'FILTER_NAME' => 'arrFilter',
   'HIDE_LINK_WHEN_NO_DETAIL' => 'N',
   'IBLOCK_ID' => 3,
@@ -56,7 +54,7 @@ $APPLICATION->IncludeComponent(
   'PARENT_SECTION_CODE' => '',
   'PREVIEW_TRUNCATE_LEN' => '',
   'PROPERTY_CODE' => [
-   0 => 'housing_complexes__images'
+   'housing_complexes__images'
   ],
   'SET_BROWSER_TITLE' => 'N',
   'SET_LAST_MODIFIED' => 'N',

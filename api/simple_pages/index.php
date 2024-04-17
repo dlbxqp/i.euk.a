@@ -1,28 +1,28 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');
 
-//die( json_encode(['housingComplexId' => $_POST['housingComplexId']], JSON_UNESCAPED_UNICODE) );
-if(isset($_POST['operatingCompanyId'])) {
+//die( json_encode(['housingComplexId' => $_GET['housingComplexId']], JSON_UNESCAPED_UNICODE) );
+if(isset($_GET['operatingCompanyId'])) {
  $GLOBALS['arrFilter'] = [
-  'PROPERTY_simple_pages__operating_companies' => [ (int)$_POST['operatingCompanyId'] ]
+  'PROPERTY_simple_pages__operating_companies' => [ (int)$_GET['operatingCompanyId'] ]
  ];
-} elseif(isset($_POST['housingComplexId'])){
+} elseif(isset($_GET['housingComplexId'])){
  $GLOBALS['arrFilter'] = [
-  'PROPERTY_simple_pages__housing_complexes' => [ (int)$_POST['housingComplexId'] ]
+  'PROPERTY_simple_pages__housing_complexes' => [ (int)$_GET['housingComplexId'] ]
  ];
-} elseif(isset($_POST['houseId'])){
+} elseif(isset($_GET['houseId'])){
  $GLOBALS['arrFilter'] = [
-  'PROPERTY_simple_pages__houses' => [ (int)$_POST['houseId'] ]
+  'PROPERTY_simple_pages__houses' => [ (int)$_GET['houseId'] ]
  ];
 } else{
  $GLOBALS['arrFilter'] = [];
 }
 #
-if( isset($_POST['code']) ){
- $GLOBALS['arrFilter'] = array_merge($GLOBALS['arrFilter'], ['CODE' => $_POST['code']]);
+if( isset($_GET['code']) ){
+ $GLOBALS['arrFilter'] = array_merge($GLOBALS['arrFilter'], ['CODE' => $_GET['code']]);
 }
 
-(isset($_POST['fields']) and is_array($_POST['fields'])) && ($GLOBALS['fields'] = (array)$_POST['fields']);
+(isset($_GET['fields']) and is_array($_GET['fields'])) && ($GLOBALS['fields'] = (array)$_GET['fields']);
 
 $APPLICATION->IncludeComponent(
  'bitrix:news.list',
@@ -47,10 +47,7 @@ $APPLICATION->IncludeComponent(
   'DISPLAY_PICTURE' => 'Y',
   'DISPLAY_PREVIEW_TEXT' => 'Y',
   'DISPLAY_TOP_PAGER' => 'N',
-  'FIELD_CODE' => [
-   0 => '',
-   1 => '',
-  ],
+  'FIELD_CODE' => [],
   'FILTER_NAME' => 'arrFilter',
   'HIDE_LINK_WHEN_NO_DETAIL' => 'N',
   'IBLOCK_ID' => 1,
@@ -70,11 +67,10 @@ $APPLICATION->IncludeComponent(
   'PARENT_SECTION_CODE' => '',
   'PREVIEW_TRUNCATE_LEN' => '',
   'PROPERTY_CODE' => [
-   0 => '',
-   1 => 'simple_pages__operating_companies',
-   2 => 'simple_pages__housing_complexes',
-   3 => 'simple_pages__houses',
-   4 => 'simple_pages__menu'
+   'simple_pages__operating_companies',
+   'simple_pages__housing_complexes',
+   'simple_pages__houses',
+   'simple_pages__menu'
   ],
   'SET_BROWSER_TITLE' => 'N',
   'SET_LAST_MODIFIED' => 'N',

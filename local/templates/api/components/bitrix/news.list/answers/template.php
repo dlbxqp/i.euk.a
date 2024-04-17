@@ -4,7 +4,7 @@ $this->setFrameMode(true);
 
 //die('<pre>' . print_r($arResult, true) . '</pre>');
 
-isset($_POST['operatingCompanyId']) && ($operatingCompanyId = $_POST['operatingCompanyId']);
+isset($_GET['operatingCompanyId']) && ($operatingCompanyId = $_GET['operatingCompanyId']);
 $a = [];
 foreach($arResult['ITEMS'] as $arItem){
  $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock ::GetArrayByID($arItem['IBLOCK_ID'], 'ELEMENT_EDIT'));
@@ -21,9 +21,9 @@ foreach($arResult['ITEMS'] as $arItem){
 }
 
 $i = 999;
-if( isset($_POST['count']) ){
+if( isset($_GET['count']) ){
  $count = count($a);
- $i = ($count < (int)$_POST['count']) ? ((int)$_POST['count'] - $count) : 0;
+ $i = ($count < (int)$_GET['count']) ? ((int)$_GET['count'] - $count) : 0;
 }
 $aTransfer = json_decode( file_get_contents("../../transfer/answers/{$operatingCompanyId}/data.json"), true);
 foreach($aTransfer as $v){

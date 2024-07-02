@@ -1,9 +1,6 @@
 <?php
 require($_SERVER['DOCUMENT_ROOT'] . '/bitrix/header.php');
 
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
-//use PHPMailer\PHPMailer\Exception;
 
 #< Security
 function f($a){ //die('<pre>' . print_r($a, TRUE) . '</pre>');
@@ -60,6 +57,10 @@ if($PRODUCT_ID = $element->Add($aElement)){
 require $_SERVER['DOCUMENT_ROOT'] . '/local/includes/PHPMailerMaster/src/PHPMailer.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/local/includes/PHPMailerMaster/src/Exception.php';
 require $_SERVER['DOCUMENT_ROOT'] . '/local/includes/PHPMailerMaster/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 $mail = new PHPMailer(true);
 try {

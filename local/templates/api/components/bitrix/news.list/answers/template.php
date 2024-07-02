@@ -4,7 +4,7 @@ $this->setFrameMode(true);
 
 //die('<pre>' . print_r($arResult, true) . '</pre>');
 
-isset($_GET['operatingCompanyId']) && ($operatingCompanyId = $_GET['operatingCompanyId']);
+//isset($_GET['operatingCompanyId']) && ($operatingCompanyId = $_GET['operatingCompanyId']);
 $a = [];
 foreach($arResult['ITEMS'] as $arItem){
  $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock ::GetArrayByID($arItem['IBLOCK_ID'], 'ELEMENT_EDIT'));
@@ -17,9 +17,10 @@ foreach($arResult['ITEMS'] as $arItem){
   //'operating company' => $arItem['DISPLAY_PROPERTIES']['answers__operating_company']['~VALUE']
  ];
 
- !isset($operatingCompanyId) && ($operatingCompanyId = (int)$arItem['DISPLAY_PROPERTIES']['answers__operating_company']['~VALUE']);
+ //!isset($operatingCompanyId) && ($operatingCompanyId = (int)$arItem['DISPLAY_PROPERTIES']['answers__operating_company']['~VALUE']);
 }
 
+/* 240702 off по просьбе Бартеневой
 $i = 999;
 if( isset($_GET['count']) ){
  $count = count($a);
@@ -36,7 +37,7 @@ foreach($aTransfer as $v){
   //'operating company' => $operatingCompanyId
  ];
 }
-
+*/
 
 
 exit( json_encode($a, JSON_UNESCAPED_UNICODE) );

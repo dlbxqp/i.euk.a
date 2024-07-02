@@ -282,7 +282,7 @@ $APPLICATION->IncludeComponent(
 #> simple pages
 
 #< operating company menu
-$aOperatingCompanyMenu = [5, 6, 7, 8]; //IBLOCKS IDS
+$aOperatingCompanyMenu = [6, 7, 8]; //IBLOCKS IDS; 5 - ответы на впоросы отключен 240702 по просьбе Бартеневой
 foreach($aOperatingCompanyMenu as $v){
  $GLOBALS['arrFilter'] = ['ACTIVE' => '']; //чтобы подтянуть transfer
  if($v == 5){
